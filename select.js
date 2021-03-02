@@ -1,7 +1,20 @@
-import Select from "./select.js"
+export default class Select {
+  constructor(element) {
+    this.element = element
+    this.customElement = document.createElement('div')
+    this.labelElement = document.createElement('span')
+    this.optionsCustomElement = document.createElement('ul')
+    setupCustomElement(this)
+    element.after(this.customElement)
+  }
+}
 
-const selectElements = document.querySelectorAll("[data-custom]")
+function setupCustomElement(select) {
+  select.customElement.classList.add('custom-select-container')
 
-selectElements.forEach(selectElement => {
-  new Select(selectElement)
-})
+  select.labelElement.classList.add('custom-select-value')
+  select.customElement.append(select.labelElement)
+
+  select.optionsCustomElement.classList.add('custom-select-options')
+  select.customElement.append(select.optionsCustomElement)
+}
