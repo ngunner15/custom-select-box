@@ -1,6 +1,7 @@
 export default class Select {
   constructor(element) {
     this.element = element
+    this.options = getFormattedOptions(element.querySelectorAll('option'))
     this.customElement = document.createElement('div')
     this.labelElement = document.createElement('span')
     this.optionsCustomElement = document.createElement('ul')
@@ -17,4 +18,15 @@ function setupCustomElement(select) {
 
   select.optionsCustomElement.classList.add('custom-select-options')
   select.customElement.append(select.optionsCustomElement)
+}
+
+function getFormattedOptions(optionElements) {
+  [...optionElements].map(optionElement => {
+    return {
+      value: optionElement.value,
+      label: optionElement.label,
+      selected: optionElement.selected,
+      element: optionElement
+    }
+  })
 }
