@@ -6,6 +6,7 @@ export default class Select {
     this.labelElement = document.createElement('span')
     this.optionsCustomElement = document.createElement('ul')
     setupCustomElement(this)
+    element.style.display = "none"
     element.after(this.customElement)
   }
 
@@ -32,6 +33,10 @@ function setupCustomElement(select) {
     select.optionsCustomElement.append(optionElement)
   });
   select.customElement.append(select.optionsCustomElement)
+
+  select.customElement.addEventListener("click", () => {
+    select.optionsCustomElement.classList.toggle("show")
+  })
 }
 
 function getFormattedOptions(optionElements) {
