@@ -81,6 +81,13 @@ function setupCustomElement(select) {
         if(prevOption) {
           select.selectValue(prevOption.value)
         }
+        break
+      case "ArrowDown":
+        const nextOption = select.options[select.selectedOptionIndex + 1]
+        if(nextOption) {
+          select.selectValue(nextOption.value)
+        }
+        break
     }
   })
 }
