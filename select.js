@@ -14,6 +14,10 @@ export default class Select {
     return this.options.find(option => option.selected)
   }
 
+  get selectedOptionIndex() {
+    return this.options.indexOf(this.selectedOption)
+  }
+
   selectValue(value) {
     const newSelectedOption = this.options.find(option => {
       return option.value === value
@@ -31,6 +35,7 @@ export default class Select {
 
 function setupCustomElement(select) {
   select.customElement.classList.add('custom-select-container')
+  // add focus property to custom div
   select.customElement.tabIndex = 0
 
   select.labelElement.classList.add('custom-select-value')
@@ -70,6 +75,11 @@ function setupCustomElement(select) {
       case "Space":
       select.optionsCustomElement.classList.toggle("show")
       break
+      case "ArrowUp":
+        const prevOption = select.options[select.selectedOptionIndex - 1]
+        if(prevOption) {
+          select.selectValue(prevOption.value)
+        }
     }
   })
 }
