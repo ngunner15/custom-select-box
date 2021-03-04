@@ -61,6 +61,15 @@ function setupCustomElement(select) {
   select.customElement.addEventListener("blur", () => { // removes options list when click on screen
     select.optionsCustomElement.classList.remove("show")
   })
+
+  // keyboard controls
+  select.customElement.addEventListener("keydown", e => {
+    switch (e.code) {
+      case "Space":
+      select.optionsCustomElement.classList.toggle("show")
+      break
+    }
+  })
 }
 
 function getFormattedOptions(optionElements) {
