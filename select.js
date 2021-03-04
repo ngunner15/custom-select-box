@@ -57,6 +57,10 @@ function setupCustomElement(select) {
   select.labelElement.addEventListener("click", () => {
     select.optionsCustomElement.classList.toggle("show")
   })
+
+  select.customElement.addEventListener("blur", () => { // removes options list when click on screen
+    select.optionsCustomElement.classList.remove("show")
+  })
 }
 
 function getFormattedOptions(optionElements) {
