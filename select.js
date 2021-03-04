@@ -31,8 +31,10 @@ export default class Select {
 
     this.labelElement.innerText = newSelectedOption.label
     this.optionsCustomElement.querySelector(`[data-value="${prevSelectedOption.value}"]`).classList.remove("selected")
-    this.optionsCustomElement.querySelector(`[data-value="${newSelectedOption.value}"]`).classList.add("selected")
-    //optionElement.classList.add("selected")
+    const newCustomElement = this.optionsCustomElement.querySelector(`[data-value="${newSelectedOption.value}"]`)
+    newCustomElement.classList.add("selected")
+    // scrolls to the option typed
+    newCustomElement.scrollIntoView({ block: "nearest "})
   }
 }
 
