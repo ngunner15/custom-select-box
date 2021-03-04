@@ -88,6 +88,10 @@ function setupCustomElement(select) {
           select.selectValue(nextOption.value)
         }
         break
+      case "Enter":
+      case "Escape":
+        select.optionsCustomElement.classList.remove("show")
+        break
     }
   })
 }
