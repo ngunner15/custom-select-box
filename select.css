@@ -5,6 +5,11 @@
   box-sizing: border-box;
 }
 
+.custom-select-container {
+  display: inline-block;
+  position: relative;
+}
+
 .custom-select-value {
   display: flex;
   align-items: center;
