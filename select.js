@@ -70,6 +70,9 @@ function setupCustomElement(select) {
     select.optionsCustomElement.classList.remove("show")
   })
 
+  let debounceTimeout
+  let searchTerm = ""
+
   // keyboard controls
   select.customElement.addEventListener("keydown", e => {
     switch (e.code) {
@@ -92,6 +95,19 @@ function setupCustomElement(select) {
       case "Escape":
         select.optionsCustomElement.classList.remove("show")
         break
+      default:
+        clearTimeout(debounceTimeout)
+        searchTerm += e.key // Add multiple letters
+        debounceTimeout = setTimeout(() => {
+          searchTerm = ""
+        }, 500)
+
+        const searchedOption = select.options.find(option => {
+          return option.label.toLowerCase().startsWith(searchTerm)
+        })
+        if (searchedOption) {
+          select.selectValue(searchedOption.value)
+        }
     }
   })
 }
