@@ -13,6 +13,20 @@ export default class Select {
   get selectedOption() {
     return this.options.find(option => option.selected)
   }
+
+  selectValue(value) {
+    const newSelectedOption = this.options.find(option => {
+      return option.value === value
+    })
+    const prevSelectedOption = this.selectedOption
+    prevSelectedOption.selected = false
+    prevSelectedOption.element.selected = false
+
+    newSelectedOption.selected = true
+    newSelectedOption.element.selected = true
+
+    this.labelElement.innerText = newSelectedOption.label
+  }
 }
 
 function setupCustomElement(select) {
@@ -30,11 +44,17 @@ function setupCustomElement(select) {
     optionElement.classList.toggle('selected', option.selected)
     optionElement.innerText = option.label
     optionElement.dataset.value = option.value
+    optionElement.addEventListener('click', () => {
+      select.optionsCustomElement.querySelector(`[data-value="${select.selectedOption.value}"]`).classList.remove("selected")
+      select.selectValue(option.value)
+      optionElement.classList.add("selected")
+      select.optionsCustomElement.classList.remove('show')
+    })
     select.optionsCustomElement.append(optionElement)
   });
   select.customElement.append(select.optionsCustomElement)
 
-  select.customElement.addEventListener("click", () => {
+  select.labelElement.addEventListener("click", () => {
     select.optionsCustomElement.classList.toggle("show")
   })
 }
